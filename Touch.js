@@ -22,13 +22,16 @@ window.addEventListener('touchstart', function() {
 	source.noteOn(0);
 }, false);
 
-var out = audio.createGain();
+var newGain = audio.createGain || audio.createGainNode;
+var newDelay = audio.createDelay || audio.createDelayNode;
+
+var out = newGain.apply(audio);
 out.connect(audio.destination);
 out.gain.value = .75;
 
-var delay = audio.createDelay();
-var delayIn = audio.createGain();
-var delayFB = audio.createGain();
+var delay = newDelay.apply(audio);
+var delayIn = newGain.apply(audio);
+var delayFB = newGain.apply(audio);
 
 delayFB.gain.value = .7;
 delayIn.gain.value = .15;
@@ -42,7 +45,7 @@ delay.connect(out);
 
 
 
-var amp = audio.createGain();
+var amp = newGain.apply(audio);
 amp.connect(out);
 amp.connect(delayIn);
 amp.gain.value = 0;
@@ -56,7 +59,7 @@ carrier.connect(amp);
 var modulator = audio.createOscillator();
 modulator.start();
 
-var modAmp = audio.createGain();
+var modAmp = newGain.apply(audio);
 modAmp.gain.value = 0;
 
 modulator.connect(modAmp);
@@ -65,7 +68,7 @@ modAmp.connect(carrier.frequency);
 var modulator2 = audio.createOscillator();
 modulator2.start();
 
-var mod2Amp = audio.createGain();
+var mod2Amp = newGain.apply(audio);
 mod2Amp.gain.value = 0;
 mod2Amp.connect(modulator.frequency);
 
@@ -74,7 +77,7 @@ var lfo = audio.createOscillator();
 lfo.frequency.value = 5;
 lfo.start();
 
-var lfoAmp = audio.createGain();
+var lfoAmp = newGain.apply(audio);
 lfoAmp.gain.value = 0;
 
 lfo.connect(lfoAmp);
