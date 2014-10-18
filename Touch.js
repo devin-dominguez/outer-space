@@ -57,12 +57,12 @@ amp.gain.value = 0;
 
 
 var carrier = audio.createOscillator();
-carrier.start();
+//carrier.start();
 
 carrier.connect(amp);
 
 var modulator = audio.createOscillator();
-modulator.start();
+//modulator.start();
 
 var modAmp = newGain.apply(audio);
 modAmp.gain.value = 0;
@@ -71,7 +71,7 @@ modulator.connect(modAmp);
 modAmp.connect(carrier.frequency);
 
 var modulator2 = audio.createOscillator();
-modulator2.start();
+//modulator2.start();
 
 var mod2Amp = newGain.apply(audio);
 mod2Amp.gain.value = 0;
@@ -80,7 +80,7 @@ mod2Amp.connect(modulator.frequency);
 
 var lfo = audio.createOscillator();
 lfo.frequency.value = 5;
-lfo.start();
+//lfo.start();
 
 var lfoAmp = newGain.apply(audio);
 lfoAmp.gain.value = 0;
