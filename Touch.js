@@ -124,7 +124,6 @@ function mDown(e) {
 canvas.addEventListener("mousedown",mDown );
 canvas.addEventListener("touchstart", mDown);
 
-
 function mUp(e) {
 	mouseDown = false;
 	amp.gain.setTargetAtTime(0, audio.currentTime, .125);
@@ -142,14 +141,15 @@ function mMove(e) {
 function tMove(e) {
 	e.preventDefault();
 	var touch = e.touches[0];
-	mouseX = touch.pageX;
-	mouseY = touch.pageY;
+	mouseX = touch.clientX;
+	mouseY = touch.clientY;
 }
 
 canvas.addEventListener("mousemove", mMove);
 canvas.addEventListener("touchmove", tMove);
 
 
+canvas.addEventListener("touchstart", tMove);
 //GFX Stuff-------------------------------------
 function particle(x, y, m) {
 	this.x = x;
