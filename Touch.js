@@ -165,7 +165,7 @@ ctx.fillStyle = "black";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 function draw() {
-window.requestAnimationFrame(draw);
+window.requestAnimationFrame(draw) || window.webKitRequestAnimationFrame(draw);
 		
 	dX = mouseX - pX;
 	dY = mouseY - pY;
