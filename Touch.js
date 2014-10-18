@@ -139,8 +139,15 @@ function mMove(e) {
 	mouseY = e.clientY;
 }
 
+function tMove(e) {
+	e.preventDefault();
+	var touch = e.touches[0];
+	mouseX = touch.pageX;
+	mouseY = touch.pageY;
+}
+
 canvas.addEventListener("mousemove", mMove);
-canvas.addEventListener("touchmove", mMove);
+canvas.addEventListener("touchmove", tMove);
 
 
 //GFX Stuff-------------------------------------
