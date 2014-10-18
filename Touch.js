@@ -1,16 +1,11 @@
 //SYNTH DEFINITIONS-----------------------------------------
-var audio;
+window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
+var audio = new AudioContext() || new webkitAudioContext();
 
-if(typeof AudioContext !== "undefined") {
-	audio = new AudioContext();
-}
-else if(typeof webkitAudioContext !== "undefined") {
-	audio = new webkitAudioContext();
-}
 		
 //http://paulbakaus.com/tutorials/html5/web-audio-on-ios/
-window.addEventListener('touchstart', function() {
+window.addEventListener("touchstart", function() {
 
 	//create empty buffer
 	var buffer = audio.createBuffer(1, 1, 22050);
