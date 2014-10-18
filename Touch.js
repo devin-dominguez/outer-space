@@ -1,7 +1,8 @@
 //SYNTH DEFINITIONS-----------------------------------------
+
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
-var audio = new AudioContext() || new webkitAudioContext();
+var audio = new webkitAudioContext() || new AudioContext();
 
 		
 //http://paulbakaus.com/tutorials/html5/web-audio-on-ios/
@@ -173,7 +174,7 @@ ctx.fillStyle = "black";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 function draw() {
-window.requestAnimationFrame(draw) || window.webKitRequestAnimationFrame(draw);
+window.requestAnimationFrame(draw) || window.webkitRequestAnimationFrame(draw);
 		
 	dX = mouseX - pX;
 	dY = mouseY - pY;
