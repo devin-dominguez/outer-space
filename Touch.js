@@ -5,8 +5,8 @@ var audio = new AudioContext() || new webkitAudioContext();
 
 		
 //http://paulbakaus.com/tutorials/html5/web-audio-on-ios/
-window.addEventListener("touchstart", function() {
-
+var isUnlocked = false;
+function unlock() {
 	//create empty buffer
 	var buffer = audio.createBuffer(1, 1, 22050);
 	var source = audio.createBufferSource();
@@ -15,8 +15,16 @@ window.addEventListener("touchstart", function() {
 	// connect to output (your speakers)
 	source.connect(audio.destination);
 	// play the file
-	source.noteOn(0);
-}, false);
+	var playNote = source.noteOn || source.start;
+	playNote.call(source,0);
+
+	setTimeout(function() {
+		if(source.playbackState === source.PLAYING_STATE || source.playbackState === source.FINISHED_STATE) {
+			isUnlocked = true;
+		}
+	}, 0);
+
+}
 
 var newGain = audio.createGain || audio.createGainNode;
 var newDelay = audio.createDelay || audio.createDelayNode;
@@ -100,6 +108,10 @@ var magTarget = 0;
 var needToClear = false;
 
 canvas.addEventListener("mousedown", function(e) {
+		if(!isUnlocked) {
+			unlock();
+		}
+	
 		mouseDown = true;
 		amp.gain.setTargetAtTime(1, audio.currentTime, .0625);
 		lfoAmp.gain.setTargetAtTime(75, audio.currentTime + .25, 8);
