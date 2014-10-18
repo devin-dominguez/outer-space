@@ -1,3 +1,7 @@
+document.ontouchmove = function(e){
+	e.preventDefault();
+}
+
 //SYNTH DEFINITIONS-----------------------------------------
 
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
