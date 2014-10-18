@@ -12,12 +12,12 @@ else if(typeof webKitAudioContext !== "undefined") {
 window.addEventListener('touchstart', function() {
 
 	//create empty buffer
-	var buffer = myContext.createBuffer(1, 1, 22050);
-	var source = myContext.createBufferSource();
+	var buffer = audio.createBuffer(1, 1, 22050);
+	var source = audio.createBufferSource();
 	source.buffer = buffer;
 
 	// connect to output (your speakers)
-	source.connect(myContext.destination);
+	source.connect(audio.destination);
 	// play the file
 	source.noteOn(0);
 }, false);
