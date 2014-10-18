@@ -9,6 +9,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 var audio = new webkitAudioContext() || new AudioContext();
 
 		
+var playNote = OscillatorNode.prototype.noteOn || OscillatorNode.prototype.start;
+
 //http://paulbakaus.com/tutorials/html5/web-audio-on-ios/
 var isUnlocked = false;
 function unlock() {
@@ -17,11 +19,11 @@ function unlock() {
 	var source = audio.createBufferSource();
 	source.buffer = buffer;
 
+	var fakePlay = source.noteOn || source.start;
 	// connect to output (your speakers)
 	source.connect(audio.destination);
 	// play the file
-	var playNote = source.noteOn || source.start;
-	playNote.call(source,0);
+	fakePlay.call(source,0);
 
 	setTimeout(function() {
 		if(source.playbackState === source.PLAYING_STATE || source.playbackState === source.FINISHED_STATE) {
@@ -61,12 +63,12 @@ amp.gain.value = 0;
 
 
 var carrier = audio.createOscillator();
-//carrier.start();
+playNote.call(carrier, 0);
 
 carrier.connect(amp);
 
 var modulator = audio.createOscillator();
-//modulator.start();
+playNote.call(modulator, 0);
 
 var modAmp = newGain.apply(audio);
 modAmp.gain.value = 0;
@@ -75,7 +77,7 @@ modulator.connect(modAmp);
 modAmp.connect(carrier.frequency);
 
 var modulator2 = audio.createOscillator();
-//modulator2.start();
+playNote.call(modulator2, 0);
 
 var mod2Amp = newGain.apply(audio);
 mod2Amp.gain.value = 0;
@@ -84,7 +86,7 @@ mod2Amp.connect(modulator.frequency);
 
 var lfo = audio.createOscillator();
 lfo.frequency.value = 5;
-//lfo.start();
+playNote.call(lfo, 0);
 
 var lfoAmp = newGain.apply(audio);
 lfoAmp.gain.value = 0;
