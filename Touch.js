@@ -110,30 +110,38 @@ var mag = 0;
 var magTarget = 0;
 
 
-
-canvas.addEventListener("mousedown", function(e) {
-		if(!isUnlocked) {
-			unlock();
-		}
-	
-		mouseDown = true;
-		amp.gain.setTargetAtTime(1, audio.currentTime, .0625);
-		lfoAmp.gain.setTargetAtTime(75, audio.currentTime + .25, 8);
+function mDown(e) {
+	if(!isUnlocked) {
+		unlock();
 	}
-);
 
-canvas.addEventListener("mouseup", function(e) {
-		mouseDown = false;
-		amp.gain.setTargetAtTime(0, audio.currentTime, .125);
-		lfoAmp.gain.setTargetAtTime(0, audio.currentTime, .25);
-	}
-);
+	mouseDown = true;
+	amp.gain.setTargetAtTime(1, audio.currentTime, .0625);
+	lfoAmp.gain.setTargetAtTime(75, audio.currentTime + .25, 8);
+}
 
-canvas.addEventListener("mousemove", function(e) {
-		mouseX = e.clientX;
-		mouseY = e.clientY;
-	}
-);
+
+canvas.addEventListener("mousedown",mDown );
+canvas.addEventListener("touchstart", mDown);
+
+
+function mUp(e) {
+	mouseDown = false;
+	amp.gain.setTargetAtTime(0, audio.currentTime, .125);
+	lfoAmp.gain.setTargetAtTime(0, audio.currentTime, .25);
+}
+
+canvas.addEventListener("mouseup", mUp);
+canvas.addEventListener("touchend", mUp);
+
+function mMove(e) {
+	mouseX = e.clientX;
+	mouseY = e.clientY;
+}
+
+canvas.addEventListener("mousemove", mMove);
+canvas.addEventListener("touchmove", mMove);
+
 
 //GFX Stuff-------------------------------------
 function particle(x, y, m) {
