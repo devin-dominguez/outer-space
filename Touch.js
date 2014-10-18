@@ -115,8 +115,9 @@ var magTarget = 0;
 function mDown(e) {
 	if(!isUnlocked) {
 		unlock();
+		console.log("!!!!");
 	}
-
+	
 	mouseDown = true;
 	amp.gain.setTargetAtTime(1, audio.currentTime, .0625);
 	lfoAmp.gain.setTargetAtTime(75, audio.currentTime + .25, 8);
