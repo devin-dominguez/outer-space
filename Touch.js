@@ -1,11 +1,12 @@
 //SYNTH DEFINITIONS-----------------------------------------
 var audio;
 
+
 if(typeof AudioContext !== "undefined") {
 	audio = new AudioContext();
 }
-else if(typeof webKitAudioContext !== "undefined") {
-	audio = new webKitAudioContext();
+else if(typeof webkitAudioContext !== "undefined") {
+	audio = new webkitAudioContext();
 }
 		
 //http://paulbakaus.com/tutorials/html5/web-audio-on-ios/
@@ -103,24 +104,21 @@ var magTarget = 0;
 
 var needToClear = false;
 
-canvas.addEventListener("mousedown",
-	function(e) {
+canvas.addEventListener("mousedown", function(e) {
 		mouseDown = true;
 		amp.gain.setTargetAtTime(1, audio.currentTime, .0625);
 		lfoAmp.gain.setTargetAtTime(75, audio.currentTime + .25, 8);
 	}
 );
 
-canvas.addEventListener("mouseup",
-	function(e) {
+canvas.addEventListener("mouseup", function(e) {
 		mouseDown = false;
 		amp.gain.setTargetAtTime(0, audio.currentTime, .125);
 		lfoAmp.gain.setTargetAtTime(0, audio.currentTime, .25);
 	}
 );
 
-canvas.addEventListener("mousemove",
-	function(e) {
+canvas.addEventListener("mousemove", function(e) {
 		mouseX = e.clientX;
 		mouseY = e.clientY;
 	}
