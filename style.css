@@ -1,0 +1,14 @@
+body {
+	text-align: center;
+	margin: 0;
+	padding: 0;
+}
+
+#main {
+	display: inline-block;
+	text-align: center;
+}
+
+#canvas {
+	border: thin solid black;
+}
