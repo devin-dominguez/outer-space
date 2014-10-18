@@ -106,7 +106,6 @@ var mag = 0;
 var magTarget = 0;
 
 
-var needToClear = false;
 
 canvas.addEventListener("mousedown", function(e) {
 		if(!isUnlocked) {
