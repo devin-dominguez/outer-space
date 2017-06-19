@@ -1,4 +1,4 @@
-#Outer Space Sound FX Generator
+# Outer Space Sound FX Generator
 Click/Touch and drag to make classic sci-fi sound effects.
 
 This should work on most devices and browsers but it is still a work in progress so no guarantees.
